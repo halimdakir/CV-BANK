@@ -1,16 +1,13 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <button type="button" class="btn btn-primary">Primary</button>
+    <h1>Hello World</h1>
+    <p>Detta är HelloWorld.vue</p>
   </div>
 </template>
 
 <script>
 export default {
   name: "HelloWorld",
-  props: {
-    msg: String,
-  },
 };
 </script>
 
