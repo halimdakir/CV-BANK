@@ -44,4 +44,35 @@ public class StudentsController {
         } else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    @PutMapping("/{id}")
+    ResponseEntity<Student> replaceStudent(@RequestBody Student newStudent, @PathVariable Integer id) {
+        return repository.findById(id).map(student -> {
+            student.setFirstName(newStudent.getFirstName());
+            student.setLastName(newStudent.getLastName());
+            student.setEducation(newStudent.getEducation());
+            repository.save(student);
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Location", "/api/v1/students/" + student.getId());
+            return new ResponseEntity<>(student, headers, HttpStatus.OK);
+        }).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @PatchMapping("/{id}")
+    ResponseEntity<Student> modifyStudent(@RequestBody Student newStudent, @PathVariable Integer id) {
+        return repository.findById(id).map(student -> {
+            if (newStudent.getFirstName() != null)
+                student.setFirstName(newStudent.getFirstName());
+            if (newStudent.getLastName() != null)
+                student.setLastName(newStudent.getLastName());
+            if (newStudent.getEducation() != null)
+                student.setEducation(newStudent.getEducation());
+
+            repository.save(student);
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Location", "/api/v1/students/" + student.getId());
+            return new ResponseEntity<>(student, headers, HttpStatus.OK);
+        }).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
 }
