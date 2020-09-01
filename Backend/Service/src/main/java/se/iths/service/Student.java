@@ -12,13 +12,13 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @Entity
 public class Student {
-    @Id @GeneratedValue int id;
+    @Id @GeneratedValue Integer id;
     String firstName;
     String lastName;
     String education;
 
 
-    public Student(int id, String firstName,String lastName, String education) {
+    public Student(Integer id, String firstName,String lastName, String education) {
         this.id=id;
         this.firstName=firstName;
         this.lastName=lastName;
