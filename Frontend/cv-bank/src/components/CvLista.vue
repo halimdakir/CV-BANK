@@ -30,24 +30,14 @@
               <thead>
                 <tr>
                   <th scope="col">Namn:</th>
-                  <th scope="col">Kontakt</th>
+                  <th scope="col">CV</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
+                  <td>Kalle</td>
                   <td>
-                    <a href="cv.html">Kalle</a>
-                  </td>
-                  <td>
-                    <a href="#">
-                      <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="#">
-                      <i class="fab fa-github"></i>
-                    </a>
-                    <a href="mailto:kalle@iths.se">
-                      <i class="fas fa-envelope"></i>
-                    </a>
+                    <a href="#">Öppna</a>
                   </td>
                 </tr>
               </tbody>

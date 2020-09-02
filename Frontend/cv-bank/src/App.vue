@@ -11,6 +11,20 @@
       <router-link class="pr-3" to="/laddaupp">Ladda upp cv</router-link>
     </div>
     <router-view />
+    <footer>
+      <img class="ml-5 py-3" src="@/assets/logo.svg" alt />
+      <div class="footer-social">
+        <a href="https://www.facebook.com/ITHogskolan/" target="_blank">
+          <i class="fab fa-facebook-square"></i>
+        </a>
+        <a href="#" target="_blank">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://www.youtube.com/channel/UCMG9JpaFbZQQVsvBoXKttmQ" target="_blank">
+          <i class="fab fa-youtube"></i>
+        </a>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -39,5 +53,21 @@ export default {
   color: white;
   padding: 0.5em 2em;
   border-radius: 5px;
+}
+
+footer {
+  background: #693250;
+  margin: 100px 0 -1px 0;
+  color: white;
+}
+
+.footer-social {
+  float: right;
+  margin: 2em 2em 0 0;
+}
+
+.footer-social a {
+  padding-right: 10px;
+  color: white;
 }
 </style>
