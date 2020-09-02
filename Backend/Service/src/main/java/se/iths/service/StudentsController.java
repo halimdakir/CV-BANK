@@ -1,5 +1,7 @@
 package se.iths.service;
 
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/v1/students")
 public class StudentsController {
@@ -18,6 +21,7 @@ public class StudentsController {
 
     @GetMapping()
     public List<Student> allStudents() {
+        log.info("All Students called");
         return repository.findAll();
     }
 
@@ -30,15 +34,18 @@ public class StudentsController {
 
     @PostMapping()
     public ResponseEntity<?> createStudent(@RequestBody Student student) {
-        repository.save(student);
+        log.info("POST create Person " + student);
+        var s =repository.save(student);
+        log.info("Saved to repository " + s);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location", "/api/v1/students/" + student.getId());
-        return new ResponseEntity<>(student, headers, HttpStatus.CREATED);
+        return new ResponseEntity<>(s, headers, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")
     ResponseEntity<?> deleteStudent(@PathVariable Integer id) {
         if (repository.existsById(id)) {
+            log.info("User deleted");
             repository.deleteById(id);
             return new ResponseEntity<>(HttpStatus.OK);
         } else
