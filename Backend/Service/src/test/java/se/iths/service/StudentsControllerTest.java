@@ -65,6 +65,7 @@ public class StudentsControllerTest {
         mockMvc.perform(get("/api/v1/students/3").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }
+
     @Test
     @DisplayName("Calls POST method with url /api/v1/students/")
     void postOneStudentWithNewId() throws Exception {
@@ -72,6 +73,7 @@ public class StudentsControllerTest {
                 post("/api/v1/students/").contentType("application/json").content("{\"id\":0,\"firstName\":\"Halim\",\"lastName\":\"Dakir\",\"education\":\"Java\"}").accept("application/json"))
                 .andExpect(status().isCreated());
     }
+
     @Test
     @DisplayName("Calls DELETE method with url /api/v1/students/1")
     void deleteOneStudentWithFirstId() throws Exception {
@@ -79,6 +81,7 @@ public class StudentsControllerTest {
                 delete("/api/v1/students/1/").accept("application/json"))
                 .andExpect(status().isOk());
     }
+
     @Test
     @DisplayName("Calls PUT method with url /api/v1/students/1")
     void putOneStudentWithFirstId() throws Exception {
@@ -86,6 +89,16 @@ public class StudentsControllerTest {
                 put("/api/v1/students/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"id\":1,\"firstName\":\"Anton\",\"lastName\":\"Johansson\",\"education\":\"NET\"}"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("Calls PATCH method with url /api/v1/students/1")
+    void patchOneUserWithFirstId() throws Exception {
+        mockMvc.perform(
+                patch("/api/v1/students/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"id\":1,\"firstName\":\"AntonNew\",\"lastName\":\"JohanssonNew\",\"education\":\"NET\"}"))
                 .andExpect(status().isOk());
     }
 }
