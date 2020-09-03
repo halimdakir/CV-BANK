@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.mockito.Mockito.when;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
@@ -63,5 +64,12 @@ public class StudentsControllerTest {
     void getOneStudentWithIdThree() throws Exception {
         mockMvc.perform(get("/api/v1/students/3").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
+    }
+    @Test
+    @DisplayName("Calls POST method with url /api/v1/students/")
+    void postOneStudentWithNewId() throws Exception {
+        mockMvc.perform(
+                post("/api/v1/students/").contentType("application/json").content("{\"id\":0,\"firstName\":\"Halim\",\"lastName\":\"Dakir\",\"education\":\"Java\"}").accept("application/json"))
+                .andExpect(status().isCreated());
     }
 }
