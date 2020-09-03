@@ -14,10 +14,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
@@ -32,12 +32,12 @@ public class StudentsControllerTest {
     MockMvc mockMvc;
 
     @BeforeEach
-    void setup() {
+    void setUp() {
         when(repository.findAll()).thenReturn(List.of(
                 new Student(1, "Anton", "Johansson", "Java"),
                 new Student(2, "Patrik", "Andersson", "Web")));
         when(repository.findById(1)).thenReturn(Optional.of(new Student(1, "Anton", "Johansson", "Java")));
-
+        when(repository.existsById(1)).thenReturn(true);
     }
 
     @Test
@@ -71,5 +71,12 @@ public class StudentsControllerTest {
         mockMvc.perform(
                 post("/api/v1/students/").contentType("application/json").content("{\"id\":0,\"firstName\":\"Halim\",\"lastName\":\"Dakir\",\"education\":\"Java\"}").accept("application/json"))
                 .andExpect(status().isCreated());
+    }
+    @Test
+    @DisplayName("Calls DELETE method with url /api/v1/students/1")
+    void deleteOneStudentWithFirstId() throws Exception {
+        mockMvc.perform(
+                delete("/api/v1/students/1/").accept("application/json"))
+                .andExpect(status().isOk());
     }
 }
