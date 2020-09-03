@@ -79,4 +79,13 @@ public class StudentsControllerTest {
                 delete("/api/v1/students/1/").accept("application/json"))
                 .andExpect(status().isOk());
     }
+    @Test
+    @DisplayName("Calls PUT method with url /api/v1/students/1")
+    void putOneStudentWithFirstId() throws Exception {
+        mockMvc.perform(
+                put("/api/v1/students/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"id\":1,\"firstName\":\"Anton\",\"lastName\":\"Johansson\",\"education\":\"NET\"}"))
+                .andExpect(status().isOk());
+    }
 }
